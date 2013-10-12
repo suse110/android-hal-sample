@@ -27,4 +27,9 @@ external/hello
 #cd system/bin
 #./hello
 
-
+3.hal layer hello.default.so
+hardware/libhardware/modules/hello/
+hardware/libhardware/include/hardware/hello.h
+编译：	mmm hardware/libhardware/modules/hello
+		make snod
+生成：	system/lib/hd/hello.default.so
