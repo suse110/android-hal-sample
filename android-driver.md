@@ -1,14 +1,11 @@
 ## 为Android系统编写Linux内核驱动程序
 1. 在kernel/drivers/目录下新建一个目录,目录中存放要添加的驱动模块*.c *.h及Kconfig,Makefile文件  
 	Kconfig内容:
-
-	```config HELLO  
+	config HELLO  
 		tristate "First Android Driver"  
 		default n  
 		---help---  
 			This is the first android driver. 
-	```
-
 	Makefile内容:  
 	obj-$(CONFIG_HELLO) += hello.o  
 
@@ -20,14 +17,12 @@
 1. 在external添加目录hello  
 2. /external/hello目中存放可执行程序源文件及Android.mk  
 	Android.mk内容:  
-	```  
 		LOCAL_PATH := $(call my-dir)  
 		include $(CLEAR_VARS)  
 		LOCAL_MODULE_TAGS := optional  
 		LOCAL_MODULE := hello  
 		LOCAL_SRC_FILES := $(call all-subdir-c-files)  
 		include $(BUILD_EXECUTABLE)
-	```
 
 	BUILD_EXECUTABLE 表示编译为可执行程序  
 
@@ -48,7 +43,6 @@
     解决办法是类似于Linux的udev规则，打开Android源代码工程目录下，进入到 system/core/rootdir 目录，里面有一个名为 **ueventd.rc** 文件，往里面添加一行：  
       **/dev/hello 0666 root root**  
   Android.mk内容:  
-	```
 		LOCAL_PATH := $(call my-dir)  
 		include $(CLEAR_VARS)  
 		LOCAL_MODULE_TAGS := optional  
@@ -58,7 +52,6 @@
 		LOCAL_SRC_FILES := hello.c  
 		LOCAL_MODULE := hello.default  
 		include $(BUILD_SHARED_LIBRARY)  
-	```
 	
   注意，LOCAL_MODULE的定义规则，hello后面跟有default，hello.default能够保证我们的模块总能被硬象抽象层加载到  
   **修改了ueventd.rc文件后,打包system.img不能使用make snod,要用make systemimage,否则对uevented.rc的更改不能生效,驱动的权限未开放,可能导致系统无法启动**  
