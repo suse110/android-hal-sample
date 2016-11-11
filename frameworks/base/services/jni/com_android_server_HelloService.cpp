@@ -7,7 +7,12 @@
 #include <hardware/hardware.h>
 #include <hardware/hello.h>
 #include <stdio.h>
-
+/*
+在 hello_init 函数中，通过Android硬件抽象层提供的 hw_get_module 方法来加载模块ID为 HELLO_HARDWARE_MODULE_ID 的硬件抽象层模块，其中，
+HELLO_HARDWARE_MODULE_ID 是在<hardware/hello.h>中定义的。Android硬件抽象层会根据 HELLO_HARDWARE_MODULE_ID 的值在Android系统
+的/system/lib/hw目录中找到相应的模块，然后加载起来，并且返回 hw_module_t 接口给调用者使用。在 jniRegisterNativeMethods 函数中，第二
+个参数的值必须对应HelloService所在的包的路径，即com.android.server.HelloService。
+*/
 namespace android
 {
 	/*在硬件抽象层中定义的硬件访问结构体，参考<hardware/hello.h>*/

@@ -1,4 +1,4 @@
-#define LOG_TAG "HelloStub"
+
 
 #include <hardware/hardware.h>
 #include <hardware/hello.h>
@@ -10,6 +10,7 @@
 #define DEVICE_NAME "/dev/hello"
 #define MODULE_NAME "Hello"
 #define MODULE_AUTHOR "shyluo@gmail.com"
+
 
 /*设备打开和关闭接口*/
 static int hello_device_open(const struct hw_module_t* module, const char* name, struct hw_device_t** device);
